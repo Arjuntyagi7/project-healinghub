@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            position: relative;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .top-logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .top-logo img {
+            height: 100px;
+            width: 100px;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .cta-buttons {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons a {
+            text-decoration: none;
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-buttons a:hover {
+            background-color: #0056b3;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="email"],
+        .password-container input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .password-container {
+            display: flex;
+            align-items: center;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #3f08f3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #007bb5;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .switch-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .switch-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .switch-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Video -->
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="game.mp4" type="video/mp4" />
+        </video>
+    </div>
+
+    <div class="top-logo">
+        <img src="logo.png" alt="Healing Hub Logo" />
+    </div>
+
+    <header>
+        <h1>HEALING HUB</h1>
+    </header>
+
+    <!-- Buttons -->
+    <div class="cta-buttons">
+        <a href="index.html">Back to Home</a>
+        <a href="APPOINTMENT.HTML">Book Appointment</a>
+        <a href="view.php">View Appointment</a>
+        <a href="contact.html">Contact Info of Doctors</a>
+    </div>
+
+    <div class="form-container">
+        <h2>Login</h2>
+        <form id="loginForm" action="login.php" method="post" onsubmit="return validateForm()">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+            <span id="emailError" class="error"></span>
+
+            <label for="password">Password:</label>
+            <div class="password-container">
+                <input type="password" id="password" name="password" required />
+            </div>
+            <span id="passwordError" class="error"></span>
+
+            <button type="submit">Login</button>
+
+            <div class="switch-link">
+                Don't have an account? <a href="signup.html">Sign up here</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let emailError = document.getElementById("emailError");
+            let passwordError = document.getElementById("passwordError");
+            let valid = true;
+
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            // Email Validation
+            let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!email.match(emailPattern)) {
+                emailError.textContent = "Invalid email format";
+                valid = false;
+            }
+
+            // Password Validation
+            if (password.length < 6) {
+                passwordError.textContent = "Password must be at least 6 characters long";
+                valid = false;
+            }
+
+            return valid;
+        }
+    </script>
+
+</body>
+</html>

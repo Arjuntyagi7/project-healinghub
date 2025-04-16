@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
+   <style>
+    video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #007bff;
+    color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: system-ui;
+    margin: 0;
+    padding: 0;
+}
+
+.top-logo {
+    text-align: center;
+    margin-top: 20px;
+    z-index: 2;
+    position: relative;
+}
+
+.top-logo img {
+    height: 100px;
+    width: 100px;
+}
+
+header {
+    text-align: center;
+    color: #fff;
+    font-size: 28px;
+    margin: 0;
+    z-index: 2;
+    position: relative;
+}
+
+.cta-buttons a {
+    text-decoration: none;
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+.cta-buttons a:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    width: 1000px;
+    margin: auto;
+    transition: 0.5s;
+}
+
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shopping {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+.shopping img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+
+.shopping .quantity {
+    background: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+    margin-top: 50px;
+}
+
+.list .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #DCE0E1;
+    padding: 20px;
+    box-shadow: 0 50px 50px #757676;
+    letter-spacing: 1px;
+    border-radius: 10px;
+}
+
+.list .item img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.list .item .title {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.list .item .price {
+    margin: 10px 0;
+}
+
+.list .item button {
+    background-color: #1C1F25;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    width: 500px;
+    background-color: #453E3B;
+    height: 100vh;
+    transition: 0.5s;
+    overflow-y: auto;
+}
+
+.active .card {
+    left: calc(100% - 500px);
+}
+
+.active .container {
+    transform: translateX(-200px);
+}
+
+.card h1 {
+    color: #0edae8;
+    font-weight: 100;
+    margin: 0;
+    padding: 0 20px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.card .checkOut {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.card .checkOut div {
+    background-color: #0ed2e8;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.card .checkOut div:nth-child(2) {
+    background-color: #1C1F25;
+    color: #fff;
+}
+
+.listCard li {
+    display: grid;
+    grid-template-columns: 100px repeat(3, 1fr);
+    color: #fff;
+    row-gap: 10px;
+    margin: 10px 0;
+}
+
+.listCard li div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.listCard li img {
+    width: 90%;
+    height: auto;
+    object-fit: contain;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.listCard li button {
+    background-color: #fff5;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.listCard .count {
+    margin: 0 10px;
+}
+
+#searchBar {
+    margin: 20px;
+    padding: 10px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+h1{
+    color: #ffffff;
+}
+   </style>
+
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="game.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="top-logo">
+        <img src="logo.png" alt="Healing Hub Logo">
+    </div>
+
+    <header>
+        <h1>HEALING HUB</h1>
+    </header>
+
+    <center>
+        <div class="cta-buttons">
+            <a href="index.html">Back to Home</a>
+            <a href="APPOINTMENT.HTML">Book Appointment</a>
+            <a href="view.html">View Appointment</a>
+            <a href="contact.html">Contact Info of Doctors</a>
+            <a href="signup.html">Reports</a>
+        </div>
+    </center>
+
+    <div class="container">
+        <div class="shop-header">
+            <h1>Shop</h1>
+            <div class="shopping">
+                <img src="cart.jpg" alt="Cart">
+                <span class="quantity">0</span>
+            </div>
+        </div>
+
+        <div class="list"></div>
+    </div>
+
+    <div class="card">
+        <h1>Cart</h1>
+        <ul class="listCard"></ul>
+        <div class="checkOut">
+            <div class="total" id="total"></div>
+            <div class="closeShopping">Close</div>
+        </div>
+    </div>
+
+  <script>
+    let openShopping = document.querySelector('.shopping');
+let closeShopping = document.querySelector('.closeShopping');
+let list = document.querySelector('.list');
+let listCard = document.querySelector('.listCard');
+let body = document.querySelector('body');
+let total = document.querySelector('.total');
+let quantity = document.querySelector('.quantity');
+
+openShopping.addEventListener('click', ()=>{
+    body.classList.add('active');
+})
+closeShopping.addEventListener('click', ()=>{
+    body.classList.remove('active');
+})
+
+let products = [
+    {
+        id: 1,
+        name: 'Paracetamol',
+        image: '1.jpg',
+        price: 10
+    },
+    {
+        id: 2,
+        name: 'Tylenol',
+        image: '2.jpg',
+        price: 120
+    },
+    {
+        id: 3,
+        name: 'Motrin',
+        image: '3.jpg',
+        price: 220
+    },
+    {
+        id: 4,
+        name: 'Aspirin',
+        image: '4.jpg',
+        price: 123
+    },
+    {
+        id: 5,
+        name: 'Ibuprofen',
+        image: '5.jpg',
+        price: 320
+    },
+    {
+        id: 6,
+        name: 'Advil',
+        image: '6.jpg',
+        price: 153
+    },
+    {
+        id: 7,
+        name: 'Excedrin',
+        image: '7.jpg',
+        price: 140
+    },
+    {
+        id: 8,
+        name: 'NyQuil',
+        image: '8.jpg',
+        price: 160
+    },
+    {
+        id: 9,
+        name: 'DayQuil',
+        image: '9.jpg',
+        price: 180
+    },
+    {
+        id: 10,
+        name: 'Claritin',
+        image: '10.jpg',
+        price: 120
+    },
+    {
+        id: 11,
+        name: 'Benadryl',
+        image: '11.jpg',
+        price: 190
+    },
+    {
+        id: 12,
+        name: 'Pepto-Bismol',
+        image: '12.jpg',
+        price: 156
+    },
+    {
+        id: 13,
+        name: 'Imodium',
+        image: '13.jpg',
+        price: 149
+    },
+    {
+        id: 14,
+        name: 'Zyrtec',
+        image: '14.jpg',
+        price: 173
+    },
+    {
+        id: 15,
+        name: 'Robitussin',
+        image: '15.jpg',
+        price: 184
+    }
+];
+let listCards  = [];
+function initApp(){
+    products.forEach((value, key) =>{
+        let newDiv = document.createElement('div');
+        newDiv.classList.add('item');
+        newDiv.innerHTML = `
+            <img src="image/${value.image}">
+            <div class="title">${value.name}</div>
+            <div class="price">₹ ${value.price.toLocaleString()}</div>
+            <button onclick="addToCard(${key})">Add To Card</button>`;
+        list.appendChild(newDiv);
+    })
+}
+initApp();
+function addToCard(key){
+    if(listCards[key] == null){
+        listCards[key] = JSON.parse(JSON.stringify(products[key]));
+        listCards[key].quantity = 1;
+    }
+    reloadCard();
+}
+function reloadCard(){
+    listCard.innerHTML = '';
+    let count = 0;
+    let totalPrice = 0;
+    listCards.forEach((value, key)=>{
+        totalPrice = totalPrice + value.price;
+        count = count + value.quantity;
+        if(value != null){
+            let newDiv = document.createElement('li');
+            newDiv.innerHTML = `
+                <div><img src="image/${value.image}"/></div>
+                <div>${value.name}</div>
+                <div>₹ ${value.price.toLocaleString()}</div>
+                <div>
+                    <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
+                    <div class="count">${value.quantity}</div>
+                    <button onclick="changeQuantity(${key}, ${value.quantity + 1})">+</button>
+                </div>`;
+                listCard.appendChild(newDiv);
+        }
+    })
+    total.innerText = `Procced to Buy`;
+    quantity.innerText = count;
+}
+function changeQuantity(key, quantity){
+    if(quantity == 0){
+        delete listCards[key];
+    }else{
+        listCards[key].quantity = quantity;
+        listCards[key].price = quantity * products[key].price;
+    }
+    reloadCard();
+}
+
+// Add click handler for checkout
+total.addEventListener('click', function() {
+    let count = 0;
+    let totalPrice = 0;
+    listCards.forEach((value, key)=>{
+        if(value != null){
+            totalPrice = totalPrice + value.price;
+            count = count + value.quantity;
+        }
+    });
+    
+    if (count > 0) {
+        alert(`Checkout successful! Total amount: ₹${totalPrice.toLocaleString()}`);
+        localStorage.setItem('totalAmount', totalPrice);
+        window.location.href = 'pay.html';
+    } else {
+        alert('Your cart is empty!');
+    }
+});
+
+  </script>
+   <footer>
+    <p>&copy; HEALING HUB: All rights reserved.</p>
+</footer>
+</body>
+</html>

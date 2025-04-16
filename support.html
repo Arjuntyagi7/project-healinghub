@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24/7 Support | HEALING HUB</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body, html {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    color: #ffffff;
+}
+
+/* === Video Background (Unchanged) === */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+.video-container video {
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+
+/* === Header === */
+header {
+    text-align: center;
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+header img {
+    vertical-align: middle;
+}
+header h1 {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 36px;
+    color: #00e6e6;
+}
+
+/* === Tagline === */
+.new {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    color: #fb0707;
+}
+
+/* === Main Container === */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.65);
+    border-radius: 20px;
+    margin-top: 20px;
+    color: #f2f2f2;
+}
+
+/* === Call-to-Action Buttons === */
+.cta-buttons {
+    margin: 30px 0;
+}
+.cta-buttons a {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #00ffff, #0077ff);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+.cta-buttons a:hover {
+    background: linear-gradient(135deg, #00ccff, #0047b3);
+    transform: scale(1.08);
+}
+
+/* === Features Section === */
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+.feature-box {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px;
+    width: 300px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    text-align: center;
+}
+.feature-box:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 255, 255, 0.4);
+}
+.feature-box h3 {
+    color: #00ffff;
+}
+.feature-box p {
+    color: #e6f7ff;
+}
+
+/* === Footer === */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 50, 0.7);
+    font-size: 14px;
+    color: #ccc;
+    margin-top: 40px;
+}
+
+/* === Date & Time Display === */
+#datetime {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #00e5ff;
+    font-weight: bold;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+    .feature-box {
+        width: 90%;
+    }
+    header h1 {
+        font-size: 24px;
+        display: block;
+        margin-top: 10px;
+    }
+}
+
+    </style>
+    
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay loop muted playsinline>
+            <source src="game.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <header>
+        <img src="logo.png" height="100" width="100" alt="Healing Hub Logo">
+        <h1>HEALING HUB - 24/7 SUPPORT</h1>
+        <div class="new">
+            <center>  <b><p>"Here to help you, anytime – day or night."</p></b></center>
+          </div>
+      
+    </header>
+<br>
+    
+    <div class="container">
+        <p>Welcome to our 24/7 support center. We're always ready to assist you with any queries or health-related issues.</p>
+
+        <div class="cta-buttons">
+            <a href="index.html">Home</a>
+            <a href="APPOINTMENT.HTML">Book Appointment</a>
+            <a href="emergency.html">Emergency</a>
+        </div>
+
+        <div class="features">
+            <div class="feature-box">
+                <h3>Live Chat Support</h3>
+                <p>Our online support team is available round the clock to assist you through live chat.</p>
+                <p><strong>Chat ID:</strong> healinghub_support</p>
+            </div>
+            <div class="feature-box">
+                <h3>Email Support</h3>
+                <p>Send your queries anytime, and we’ll respond within minutes.</p>
+                <p><strong>Email:</strong> support@healinghub.com</p>
+            </div>
+            <div class="feature-box">
+                <h3>Call Us</h3>
+                <p>Our lines are always open for emergencies and queries.</p>
+                <p><strong>Phone:</strong> +91-99999-88888</p>
+            </div>
+        </div>
+
+        <div id="datetime" style="color: white; font-weight: bold; padding-top: 20px;"></div>
+    </div>
+
+    <footer>
+        <p>&copy; HEALING HUB: All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            alert("24/7 Support Team is here for you!");
+        };
+
+        function updateDateTime() {
+            const now = new Date();
+            const formatted = now.toLocaleString();
+            document.getElementById("datetime").textContent = "Current Date & Time: " + formatted;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      height: 100vh;
+    }
+
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    video {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .top-logo {
+      position: relative;
+      width: 100%;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .top-logo img {
+      height: 100px;
+      width: 100px;
+      margin-top: 10px;
+    }
+
+    header {
+      text-align: center;
+      color: #fff;
+      font-size: 28px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .cta-buttons {
+      margin-top: 10px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .cta-buttons a {
+      text-decoration: none;
+      display: inline-block;
+      background-color: #007bff;
+      color: #fff;
+      padding: 15px 30px;
+      border-radius: 5px;
+      margin: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .cta-buttons a:hover {
+      background-color: #0056b3;
+    }
+
+    .form-container {
+      background-color: #ffffffd0;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin: 20px 0;
+      z-index: 2;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4209ed;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #09acf8;
+    }
+
+    .switch-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .switch-link a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .switch-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="game.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="top-logo">
+    <img src="logo.png" alt="Healing Hub Logo" />
+  </div>
+
+  <header>
+    <h1>HEALING HUB</h1>
+  </header>
+
+  <div class="cta-buttons">
+    <a href="index.html">Back to Home</a>
+    <a href="APPOINTMENT.HTML">Book Appointment</a>
+    <a href="view.php">View Appointment</a>
+    <a href="contact.html">Contact Info of Doctors</a>
+  </div>
+
+  <div class="form-container">
+    <form action="signup.php" method="post" onsubmit="return validateForm()">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required />
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" pattern="\d{10}" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required />
+
+      <button type="submit">Sign Up</button>
+
+      <div class="switch-link">
+        Already have an account? <a href="logic.html">Login here</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+
+</body>
+</html>

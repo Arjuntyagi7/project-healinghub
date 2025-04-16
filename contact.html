@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Contact Info</title>
+  <style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+    background-color: #f4f4f4;
+  }
+
+  .top-logo {
+    text-align: center;
+    margin-top: 10px;
+    z-index: 2;
+    position: relative;
+  }
+
+  .top-logo img {
+    height: 100px;
+    width: 100px;
+  }
+
+  header {
+    text-align: center;
+    color: #fff;
+    font-size: 28px;
+    margin: 0;
+    z-index: 2;
+    position: relative;
+  }
+
+  .video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cta-buttons {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .cta-buttons a {
+    text-decoration: none;
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .cta-buttons a:hover {
+    background-color: #0056b3;
+  }
+
+  .info-container {
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: #ffffffdd;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  }
+
+  h2 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+
+  .doctor-card {
+    position: relative;
+    background-color: #f9f9f9;
+    border-left: 5px solid #007bff;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 6px;
+    padding-bottom: 70px; /* Space for button */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .doctor-card h3 {
+    margin: 0 0 10px;
+    color: #094dec;
+  }
+
+  .doctor-card p {
+    margin: 5px 0;
+  }
+
+  .doctor-card:hover {
+    transform: scale(1.03);
+    background-color: #e9f5ff;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+  }
+
+  .doctor-card .add-to-cart {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .doctor-card .add-to-cart:hover {
+    background-color: #218838;
+  }
+
+  .shopping {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: #ffffffdd;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  }
+
+  .shopping img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .shopping .quantity {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+  <div class="top-logo">
+    <img src="logo.png" alt="Healing Hub Logo" />
+  </div>
+
+  <header>
+    <h1>HEALING HUB</h1>
+  </header>
+
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="game.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="cta-buttons">
+    <a href="index.html">Back to Home</a>
+    <a href="APPOINTMENT.HTML">Book Appointment</a>
+    <a href="view.php">View Appointment</a>
+    <a href="donation.html">blood/organ donation</a>
+  </div>
+
+  <div class="info-container">
+    <h2>Contact Information of Doctors</h2>
+
+    <div class="doctor-card">
+      <h3>Dr. Arjun Tyagi</h3>
+      <p><strong>Organ Speciality:</strong> Cardiology (Heart)</p>
+      <p><strong>Cabin:</strong> A-101</p>
+      <p><strong>Phone:</strong> +91-9876543210</p>
+      <p><strong>Private Clinic:</strong> 12 Green Avenue, Sector 15, Delhi</p>
+      <p><strong>Email:</strong> arjun.tyagi@healinghub.com</p>
+    </div>
+
+    <div class="doctor-card">
+      <h3>Dr. Astha Tyagi</h3>
+      <p><strong>Organ Speciality:</strong> Pulmonology (Lungs)</p>
+      <p><strong>Cabin:</strong> B-202</p>
+      <p><strong>Phone:</strong> +91-9988776655</p>
+      <p><strong>Private Clinic:</strong> 45 Lotus Park, Ghaziabad</p>
+      <p><strong>Email:</strong> astha.tyagi@healinghub.com</p>
+    </div>
+
+    <div class="doctor-card">
+      <h3>Dr. Arun Vivek</h3>
+      <p><strong>Organ Speciality:</strong>Nephrology (Kidneys)</p>
+      <p><strong>Cabin:</strong> C-303</p>
+      <p><strong>Phone:</strong> +91-9123456780</p>
+      <p><strong>Private Clinic:</strong> 88 Central Street, Noida</p>
+      <p><strong>Email:</strong> arun.vivek@healinghub.com</p>
+    </div>
+
+    <div class="doctor-card">
+      <h3>Dr. Arunima Soni</h3>
+      <p><strong>Organ Speciality:</strong> Hepatology (Liver)</p>
+      <p><strong>Cabin:</strong> D-404</p>
+      <p><strong>Phone:</strong> +91-9012345678</p>
+      <p><strong>Private Clinic:</strong> 17 Sapphire Enclave, Gurgaon</p>
+      <p><strong>Email:</strong> arunima.soni@healinghub.com</p>
+    </div>
+  </div>
+</body>
+</html>

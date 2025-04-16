@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Page</title>
+    <link rel="stylesheet" href="home.css">
+    <style>
+        body {
+            background-color: aqua;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .payment-form {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .payment-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .payment-form input[type="text"],
+        .payment-form input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .payment-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .payment-form button:hover {
+            background-color: #45a049;
+        }
+        .total-price {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Billing Page</h1>
+    <div class="total-price" id="totalPrice">Total Amount: $0.00</div>
+    <div class="payment-form">
+        <label for="paymentMethod">Select Payment Method:</label>
+        <select id="paymentMethod">
+            <option value="upi">UPI</option>
+            <option value="card">Credit/Debit Card</option>
+        </select>
+
+        <div id="upiDetails" class="payment-details">
+            <label for="upiId">UPI ID:</label>
+            <input type="text" id="upiId" placeholder="Enter your UPI ID" required>
+        </div>
+
+        <div id="cardDetails" class="payment-details" style="display: none;">
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" placeholder="Enter your card number" required>
+            <label for="cardExpiry">Expiry Date (MM/YY):</label>
+            <input type="text" id="cardExpiry" placeholder="MM/YY" required>
+            <label for="cardCVC">CVC:</label>
+            <input type="number" id="cardCVC" placeholder="CVC" required>
+        </div>
+
+        <button id="payButton">Pay Now</button>
+    </div>
+
+    <script>
+        // Function to update total price from local storage
+        function updateTotalPrice() {
+            const totalAmount = parseFloat(localStorage.getItem('totalAmount')) || 0;
+            document.getElementById('totalPrice').innerText = `Total Amount: ₹${totalAmount.toFixed(2)}`;
+        }
+
+        // Call the function to update the total price
+        updateTotalPrice();
+
+        // Show/hide payment details based on selected payment method
+        document.getElementById('paymentMethod').addEventListener('change', function() {
+            const selectedMethod = this.value;
+            document.getElementById('upiDetails').style.display = selectedMethod === 'upi' ? 'block' : 'none';
+            document.getElementById('cardDetails').style.display = selectedMethod === 'card' ? 'block' : 'none';
+        });
+
+        // Handle payment button click
+        document.getElementById('payButton').addEventListener('click', function() {
+            const selectedMethod = document.getElementById('paymentMethod').value;
+            const totalAmount = parseFloat(localStorage.getItem('totalAmount')) || 0;
+
+            if (selectedMethod === 'upi') {
+                const upiId = document.getElementById('upiId').value;
+                alert(`Payment of ₹${totalAmount.toFixed(2)} made using UPI ID: ${upiId}`);
+            } else if (selectedMethod === 'card') {
+                const cardNumber = document.getElementById('cardNumber').value;
+                const cardExpiry = document.getElementById('cardExpiry').value;
+                const cardCVC = document.getElementById('cardCVC').value;
+                alert(`Payment of ₹${totalAmount.toFixed(2)} made using Card Number: ${cardNumber}`);
+            }
+        });
+    </script>
+</body>
+</html>

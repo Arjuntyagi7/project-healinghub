@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEALING HUB</title>
+    <link rel="stylesheet" href="homes.css">
+    <style>
+        .feature-box {
+    background-color: rgba(240, 242, 243, 0.886);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px;
+    width: 300px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 255, 255, 0.5);
+}
+
+    </style>
+    
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay loop muted playsinline>
+            <source src="game.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <header>
+        <img src="logo.png" height="100" width="100" alt="Healing Hub Logo">
+        <h1>HEALING HUB</h1>
+    </header>
+
+    <div class="new">
+        <p>"Compassionate care, exceptional healing."</p>
+    </div>
+
+    <div class="container">
+        <p>Your health is our first priority.</p>
+        <div class="cta-buttons">
+            <a href="APPOINTMENT.HTML">Book Appointment</a>
+            <a href="view.php">View Appointment</a>
+            <a href="contact.html">Contact Info of Doctors</a>
+            <a href="donation.html">Blood/Organ Donation</a>
+            <a href="signup.html">Reports</a>
+            <a href="order.html">Order Medicine</a>
+        </div>
+
+        <h2><a href="emergency.html" id="emergency-link">EMERGENCY</a></h2>
+
+        <div class="features">
+            <div class="feature-box" onclick="highlightBox(this)">
+                <h3><a href="services.html">Quality Services</a></h3>
+                <p>We ensure only the best doctors reach you, sourced from trusted institutes.</p>
+            </div>
+            <div class="feature-box" onclick="highlightBox(this)">
+                <h3>Location</h3>
+                <p>Location of our nearest hospital near your location.</p>
+            </div>
+            <div class="feature-box" onclick="highlightBox(this)">
+                <h3><a href="support.html">24/7 Support</a></h3>
+                <p>Our dedicated support team is here to assist you anytime.</p>
+            </div>
+            <div id="datetime" style="color: white; font-weight: bold; padding-top: 20px;"></div>
+        </div>
+    <footer>
+        <p>&copy; HEALING HUB: All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("emergency-link").addEventListener("click", function(event) {
+            const confirmEmergency = confirm("Are you sure you want to proceed to EMERGENCY?");
+            if (!confirmEmergency) {
+                event.preventDefault();
+            }
+        });
+
+        function updateDateTime() {
+            const now = new Date();
+            const formatted = now.toLocaleString();
+            document.getElementById("datetime").textContent = "Current Date & Time: " + formatted;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+        function highlightBox(box) {
+    box.classList.add("active-feature");
+    setTimeout(() => {
+        box.classList.remove("active-feature");
+    }, 1000);
+}
+
+    </script>
+</body>
+</html>
