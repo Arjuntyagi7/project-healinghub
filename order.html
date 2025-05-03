@@ -295,8 +295,8 @@ h1{
             <a href="index.html">Back to Home</a>
             <a href="APPOINTMENT.HTML">Book Appointment</a>
             <a href="view.html">View Appointment</a>
-            <a href="contact.html">Contact Info of Doctors</a>
             <a href="signup.html">Reports</a>
+            <a href="view_deliveries.php">Deliveries</a>
         </div>
     </center>
 
@@ -307,6 +307,10 @@ h1{
                 <img src="cart.jpg" alt="Cart">
                 <span class="quantity">0</span>
             </div>
+
+            <input type="text" id="searchBar" placeholder="Search medicines...">
+<p id="noResults" style="color:white; display:none;">This medicine is not available.</p>
+
         </div>
 
         <div class="list"></div>
@@ -321,190 +325,156 @@ h1{
         </div>
     </div>
 
-  <script>
-    let openShopping = document.querySelector('.shopping');
-let closeShopping = document.querySelector('.closeShopping');
-let list = document.querySelector('.list');
-let listCard = document.querySelector('.listCard');
-let body = document.querySelector('body');
-let total = document.querySelector('.total');
-let quantity = document.querySelector('.quantity');
-
-openShopping.addEventListener('click', ()=>{
-    body.classList.add('active');
-})
-closeShopping.addEventListener('click', ()=>{
-    body.classList.remove('active');
-})
-
-let products = [
-    {
-        id: 1,
-        name: 'Paracetamol',
-        image: '1.jpg',
-        price: 10
-    },
-    {
-        id: 2,
-        name: 'Tylenol',
-        image: '2.jpg',
-        price: 120
-    },
-    {
-        id: 3,
-        name: 'Motrin',
-        image: '3.jpg',
-        price: 220
-    },
-    {
-        id: 4,
-        name: 'Aspirin',
-        image: '4.jpg',
-        price: 123
-    },
-    {
-        id: 5,
-        name: 'Ibuprofen',
-        image: '5.jpg',
-        price: 320
-    },
-    {
-        id: 6,
-        name: 'Advil',
-        image: '6.jpg',
-        price: 153
-    },
-    {
-        id: 7,
-        name: 'Excedrin',
-        image: '7.jpg',
-        price: 140
-    },
-    {
-        id: 8,
-        name: 'NyQuil',
-        image: '8.jpg',
-        price: 160
-    },
-    {
-        id: 9,
-        name: 'DayQuil',
-        image: '9.jpg',
-        price: 180
-    },
-    {
-        id: 10,
-        name: 'Claritin',
-        image: '10.jpg',
-        price: 120
-    },
-    {
-        id: 11,
-        name: 'Benadryl',
-        image: '11.jpg',
-        price: 190
-    },
-    {
-        id: 12,
-        name: 'Pepto-Bismol',
-        image: '12.jpg',
-        price: 156
-    },
-    {
-        id: 13,
-        name: 'Imodium',
-        image: '13.jpg',
-        price: 149
-    },
-    {
-        id: 14,
-        name: 'Zyrtec',
-        image: '14.jpg',
-        price: 173
-    },
-    {
-        id: 15,
-        name: 'Robitussin',
-        image: '15.jpg',
-        price: 184
-    }
-];
-let listCards  = [];
-function initApp(){
-    products.forEach((value, key) =>{
-        let newDiv = document.createElement('div');
-        newDiv.classList.add('item');
-        newDiv.innerHTML = `
-            <img src="image/${value.image}">
-            <div class="title">${value.name}</div>
-            <div class="price">₹ ${value.price.toLocaleString()}</div>
-            <button onclick="addToCard(${key})">Add To Card</button>`;
-        list.appendChild(newDiv);
-    })
-}
-initApp();
-function addToCard(key){
-    if(listCards[key] == null){
-        listCards[key] = JSON.parse(JSON.stringify(products[key]));
-        listCards[key].quantity = 1;
-    }
-    reloadCard();
-}
-function reloadCard(){
-    listCard.innerHTML = '';
-    let count = 0;
-    let totalPrice = 0;
-    listCards.forEach((value, key)=>{
-        totalPrice = totalPrice + value.price;
-        count = count + value.quantity;
-        if(value != null){
-            let newDiv = document.createElement('li');
-            newDiv.innerHTML = `
-                <div><img src="image/${value.image}"/></div>
-                <div>${value.name}</div>
-                <div>₹ ${value.price.toLocaleString()}</div>
-                <div>
-                    <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
-                    <div class="count">${value.quantity}</div>
-                    <button onclick="changeQuantity(${key}, ${value.quantity + 1})">+</button>
-                </div>`;
-                listCard.appendChild(newDiv);
-        }
-    })
-    total.innerText = `Procced to Buy`;
-    quantity.innerText = count;
-}
-function changeQuantity(key, quantity){
-    if(quantity == 0){
-        delete listCards[key];
-    }else{
-        listCards[key].quantity = quantity;
-        listCards[key].price = quantity * products[key].price;
-    }
-    reloadCard();
-}
-
-// Add click handler for checkout
-total.addEventListener('click', function() {
-    let count = 0;
-    let totalPrice = 0;
-    listCards.forEach((value, key)=>{
-        if(value != null){
-            totalPrice = totalPrice + value.price;
-            count = count + value.quantity;
-        }
-    });
+    <script>
+        let openShopping = document.querySelector('.shopping');
+        let closeShopping = document.querySelector('.closeShopping');
+        let list = document.querySelector('.list');
+        let listCard = document.querySelector('.listCard');
+        let body = document.querySelector('body');
+        let total = document.querySelector('.total');
+        let quantity = document.querySelector('.quantity');
     
-    if (count > 0) {
-        alert(`Checkout successful! Total amount: ₹${totalPrice.toLocaleString()}`);
-        localStorage.setItem('totalAmount', totalPrice);
-        window.location.href = 'pay.html';
-    } else {
-        alert('Your cart is empty!');
-    }
-});
-
-  </script>
+        openShopping.addEventListener('click', () => {
+            body.classList.add('active');
+        });
+        closeShopping.addEventListener('click', () => {
+            body.classList.remove('active');
+        });
+    
+        let products = [
+            { id: 1, name: 'Paracetamol', image: '1.jpg', price: 30 },
+            { id: 2, name: 'Tylenol', image: '2.jpg', price: 150 },
+            { id: 3, name: 'Motrin', image: '3.jpg', price: 220 },
+            { id: 4, name: 'Aspirin', image: '4.jpg', price: 220 },
+            { id: 5, name: 'Ibuprofen', image: '5.jpg', price: 320 },
+            { id: 6, name: 'Advil', image: '6.jpg', price: 250 },
+            { id: 7, name: 'Excedrin', image: '7.jpg', price: 140 },
+            { id: 8, name: 'NyQuil', image: '8.jpg', price: 160 },
+            { id: 9, name: 'DayQuil', image: '9.jpg', price: 180 },
+            { id: 10, name: 'Claritin', image: '10.jpg', price: 120 },
+            { id: 11, name: 'Benadryl', image: '11.jpg', price: 190 },
+            { id: 12, name: 'Pepto-Bismol', image: '12.jpg', price: 160 },
+            { id: 13, name: 'Imodium', image: '13.jpg', price: 149 },
+            { id: 14, name: 'Zyrtec', image: '14.jpg', price: 180 },
+            { id: 15, name: 'Robitussin', image: '15.jpg', price: 190 }
+        ];
+    
+        let listCards = [];
+    
+        function initApp() {
+            list.innerHTML = '';
+            products.forEach((value, key) => {
+                let newDiv = document.createElement('div');
+                newDiv.classList.add('item');
+                newDiv.innerHTML = `
+                    <img src="image/${value.image}" alt="${value.name}">
+                    <div class="title">${value.name}</div>
+                    <div class="price">₹ ${value.price.toLocaleString()}</div>
+                    <button onclick="addToCard(${key})">Add To Cart</button>`;
+                list.appendChild(newDiv);
+            });
+        }
+        initApp();
+    
+        function addToCard(key) {
+            if (listCards[key] == null) {
+                listCards[key] = JSON.parse(JSON.stringify(products[key]));
+                listCards[key].quantity = 1;
+            }
+            reloadCard();
+        }
+    
+        function reloadCard() {
+            listCard.innerHTML = '';
+            let count = 0;
+            let totalPrice = 0;
+            listCards.forEach((value, key) => {
+                if (value != null) {
+                    totalPrice += products[key].price * value.quantity;
+                    count += value.quantity;
+                    let newDiv = document.createElement('li');
+                    newDiv.innerHTML = `
+                        <div><img src="image/${value.image}" alt="${value.name}"/></div>
+                        <div>${value.name}</div>
+                        <div>₹ ${products[key].price.toLocaleString()}</div>
+                        <div>
+                            <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
+                            <div class="count">${value.quantity}</div>
+                            <button onclick="changeQuantity(${key}, ${value.quantity + 1})">+</button>
+                        </div>`;
+                    listCard.appendChild(newDiv);
+                }
+            });
+    
+            let deliveryCharge = 100;
+            let finalAmount = totalPrice + deliveryCharge;
+    
+            total.innerText = `Buy: ₹${finalAmount.toLocaleString()} (incl. ₹${deliveryCharge} delivery)`;
+            quantity.innerText = count;
+        }
+    
+        function changeQuantity(key, quantity) {
+            if (quantity == 0) {
+                delete listCards[key];
+            } else {
+                listCards[key].quantity = quantity;
+            }
+            reloadCard();
+        }
+    
+        total.addEventListener('click', function () {
+            let count = 0;
+            let totalPrice = 0;
+    
+            listCards.forEach((value, key) => {
+                if (value != null) {
+                    totalPrice += products[key].price * value.quantity;
+                    count += value.quantity;
+                }
+            });
+    
+            let deliveryCharge = 100;
+            let finalAmount = totalPrice + deliveryCharge;
+    
+            if (count > 0) {
+                alert(`Checkout successful!\n\nItems: ₹${totalPrice.toLocaleString()}\nDelivery: ₹${deliveryCharge}\n\nTotal: ₹${finalAmount.toLocaleString()}`);
+                localStorage.setItem('totalAmount', finalAmount);
+                window.location.href = 'pay.html';
+            } else {
+                alert('Your cart is empty!');
+            }
+        });
+    
+        document.getElementById('searchBar').addEventListener('input', function () {
+            let keyword = this.value.toLowerCase();
+            list.innerHTML = '';
+            let found = false;
+    
+            if (keyword === '') {
+                initApp();
+                document.getElementById('noResults').style.display = 'none';
+                return;
+            }
+    
+            products.forEach((value, key) => {
+                if (value.name.toLowerCase().includes(keyword)) {
+                    let newDiv = document.createElement('div');
+                    newDiv.classList.add('item');
+                    newDiv.innerHTML = `
+                        <img src="image/${value.image}" alt="${value.name}">
+                        <div class="title">${value.name}</div>
+                        <div class="price">₹ ${value.price.toLocaleString()}</div>
+                        <button onclick="addToCard(${key})">Add To Cart</button>`;
+                    list.appendChild(newDiv);
+                    found = true;
+                }
+            });
+    
+            document.getElementById('noResults').style.display = found ? 'none' : 'block';
+        });
+    </script>
+    
+        
    <footer>
     <p>&copy; HEALING HUB: All rights reserved.</p>
 </footer>
