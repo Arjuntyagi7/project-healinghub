@@ -136,6 +136,7 @@
             <a href="view.php">View Appointment</a>
             <a href="contact.html">Contact Info of Doctors</a>
             <a href="signup.html">Reports</a>
+            <a href="view_deliveries.php">delivery</a>
         </div>
     </center>
 
@@ -158,36 +159,61 @@
             const totalAmount = parseFloat(localStorage.getItem('totalAmount')) || 0;
             document.getElementById('totalPrice').innerText = `Total Amount: ₹${totalAmount.toFixed(2)}`;
         }
-
+    
         function generateTransactionId() {
             return Math.floor(10000000000 + Math.random() * 90000000000).toString();
         }
-
+    
         updateTotalPrice();
-
+    
         document.getElementById('payButton').addEventListener('click', function () {
             const totalAmount = parseFloat(localStorage.getItem('totalAmount')) || 0;
             const name = document.getElementById('nameInput').value.trim();
             const phone = document.getElementById('phoneInput').value.trim();
             const address = document.getElementById('addressInput').value.trim();
             const transactionId = generateTransactionId();
-            const resultElement = document.getElementById('resultMessage');
-
+            const paymentForm = document.querySelector('.payment-form');
+    
             if (name === "" || phone === "" || address === "") {
-                resultElement.textContent = "Please fill in all the fields.";
-                resultElement.style.color = "red";
+                document.getElementById('resultMessage').textContent = "Please fill in all the fields.";
+                document.getElementById('resultMessage').style.color = "red";
                 return;
             }
-
-            resultElement.textContent = `Order confirmed! Tracking ID: ${transactionId}. Please have ₹${totalAmount.toFixed(2)} ready for Cash on Delivery.`;
-            resultElement.style.color = "blue";
-
+    
+            if (!/^\d{10}$/.test(phone)) {
+                document.getElementById('resultMessage').textContent = "Please enter a valid 10-digit phone number.";
+                document.getElementById('resultMessage').style.color = "red";
+                return;
+            }
+    
+            // Optional: Show a temporary "Processing" message
+            document.getElementById('resultMessage').textContent = "Processing your order...";
+            document.getElementById('resultMessage').style.color = "orange";
+    
             fetch("store_order.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: `amount=${totalAmount}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&address=${encodeURIComponent(address)}&transaction_id=${transactionId}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Replace the form with confirmation message
+                paymentForm.innerHTML = `
+                    <h2 style="color: blue; text-align: center;">Order Confirmed!</h2>
+                    <p style="text-align: center;">Tracking ID: <strong>${transactionId}</strong></p>
+                    <p style="text-align: center;">Please have ₹${totalAmount.toFixed(2)} ready for Cash on Delivery.</p>
+                `;
+    
+                // Optionally clear cart amount
+                localStorage.removeItem('totalAmount');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('resultMessage').textContent = "Something went wrong. Please try again.";
+                document.getElementById('resultMessage').style.color = "red";
             });
         });
     </script>
+    
 </body>
 </html>
