@@ -107,10 +107,29 @@
         button:hover {
             background-color: #0056b3;
         }
+        
         .error {
-            color: red;
-            font-size: 14px;
-        }
+        background-color: #ffe6e6;
+        color: #cc0000;
+        padding: 8px;
+        border-left: 4px solid #cc0000;
+        border-radius: 4px;
+        margin-top: 8px;
+        font-weight: bold;
+}
+.error {
+    background-color: #ffe6e6;
+    color: #cc0000;
+    padding: 8px;
+    border-left: 4px solid #cc0000;
+    border-radius: 4px;
+    margin-top: 8px;
+    font-weight: bold;
+    display: none;
+}
+
+
+
     </style>
 </head>
 <body>
@@ -179,5 +198,101 @@
         </form>
     </div>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const form = document.querySelector("form");
+          const appointmentInput = document.getElementById("appointmentTime");
+          const fields = form.querySelectorAll("input, select, textarea");
+      
+          // Set minimum datetime to now (for browser restriction)
+          const now = new Date();
+          appointmentInput.min = now.toISOString().slice(0, 16);
+      
+          // Add error containers
+          fields.forEach(field => {
+              const error = document.createElement("div");
+              error.className = "error";
+              error.style.display = "none";
+              field.parentNode.insertBefore(error, field.nextSibling);
+          });
+      
+          form.addEventListener("submit", function (e) {
+              let hasError = false;
+      
+              // Validate empty fields
+              fields.forEach(field => {
+                  const errorBox = field.nextElementSibling;
+                  if (!field.value.trim()) {
+                      e.preventDefault();
+                      hasError = true;
+                      errorBox.textContent = `${field.previousElementSibling.textContent.replace(':', '')} is required.`;
+                      errorBox.style.display = "block";
+                      field.style.borderColor = "red";
+                  } else {
+                      errorBox.textContent = "";
+                      errorBox.style.display = "none";
+                      field.style.borderColor = "";
+                  }
+              });
+      
+              const selectedDateTime = new Date(appointmentInput.value);
+              const currentTime = new Date();
+              const errorBox = appointmentInput.nextElementSibling;
+      
+              // Check date-only values
+              const selectedDate = new Date(selectedDateTime.toDateString());
+              const todayDate = new Date(currentTime.toDateString());
+      
+              // Validation rules
+              if (selectedDate < todayDate) {
+                  e.preventDefault();
+                  errorBox.textContent = "⚠️ Appointments cannot be booked for past dates.";
+                  errorBox.style.display = "block";
+                  appointmentInput.style.borderColor = "red";
+                  hasError = true;
+              } else if (selectedDate.getTime() === todayDate.getTime() && selectedDateTime < currentTime) {
+                  e.preventDefault();
+                  errorBox.textContent = "⚠️ Appointment time has already passed.";
+                  errorBox.style.display = "block";
+                  appointmentInput.style.borderColor = "red";
+                  hasError = true;
+              } else {
+                  const hour = selectedDateTime.getHours();
+                  const minute = selectedDateTime.getMinutes();
+      
+                  if (hour < 9) {
+                      e.preventDefault();
+                      errorBox.textContent = "⚠️ Appointments can only be booked after 9:00 AM.";
+                      errorBox.style.display = "block";
+                      appointmentInput.style.borderColor = "red";
+                      hasError = true;
+                  } else if (hour > 18 || (hour === 18 && minute > 30)) {
+                      e.preventDefault();
+                      errorBox.textContent = "⚠️ Appointments must be before 6:30 PM.";
+                      errorBox.style.display = "block";
+                      appointmentInput.style.borderColor = "red";
+                      hasError = true;
+                  } else {
+                      errorBox.textContent = "";
+                      errorBox.style.display = "none";
+                      appointmentInput.style.borderColor = "";
+                  }
+              }
+          });
+      
+          // Clear errors on typing
+          fields.forEach(field => {
+              field.addEventListener("input", () => {
+                  const errorBox = field.nextElementSibling;
+                  if (field.value.trim()) {
+                      errorBox.textContent = "";
+                      errorBox.style.display = "none";
+                      field.style.borderColor = "";
+                  }
+              });
+          });
+      });
+      </script>
+      
 </body>
 </html>
