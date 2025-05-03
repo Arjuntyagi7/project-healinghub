@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($hashedPassword);
         $stmt->fetch();
-
         // Verify password
         if (password_verify($password, $hashedPassword)) {
             echo "<script>alert('Login successful!'); window.location.href='medical_report.html';</script>";
