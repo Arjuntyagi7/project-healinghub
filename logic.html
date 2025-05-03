@@ -148,7 +148,7 @@
 </head>
 <body>
 
-    <!-- Background Video -->
+
     <div class="video-container">
         <video autoplay loop muted>
             <source src="game.mp4" type="video/mp4" />
@@ -191,34 +191,40 @@
             </div>
         </form>
     </div>
-
     <script>
         function validateForm() {
-            let email = document.getElementById("email").value;
-            let password = document.getElementById("password").value;
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
             let emailError = document.getElementById("emailError");
             let passwordError = document.getElementById("passwordError");
             let valid = true;
-
+    
             emailError.textContent = "";
             passwordError.textContent = "";
 
-            // Email Validation
-            let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-            if (!email.match(emailPattern)) {
-                emailError.textContent = "Invalid email format";
+            if (!email) {
+                emailError.textContent = "Please provide a valid email address to proceed with the login process.";
                 valid = false;
+            } else {
+                let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+                if (!email.match(emailPattern)) {
+                    emailError.textContent = "The email address you entered is not in a valid format. Please double-check.";
+                    valid = false;
+                }
             }
 
-            // Password Validation
-            if (password.length < 6) {
-                passwordError.textContent = "Password must be at least 6 characters long";
+            if (!password) {
+                passwordError.textContent = "Password is required to access your account. Please enter your password.";
+                valid = false;
+            } else if (password.length < 6) {
+                passwordError.textContent = "Your password must contain at least 6 characters for security reasons.";
                 valid = false;
             }
-
+    
             return valid;
         }
     </script>
+    
 
 </body>
 </html>
